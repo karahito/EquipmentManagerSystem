@@ -1,0 +1,127 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    /**
+     *  Libraries Version
+     */
+//*=====================================================================================================================*/
+    /** kotlin */
+    ext.kotlin_version = '1.1.60'
+
+    /** ButterKnife */
+    ext.butterknife_version = '8.6.0'
+
+    /** Realm */
+    ext.realm_version = "4.1.1"
+
+    /** ReactiveX Libraries Version */
+    //*===========================================================================================================*/
+    /** RxJava */
+    ext.rxjava_version = "2.1.6"
+    /** RxAndroid */
+    ext.rxandroid_version = "2.0.1"
+    /** RxKotlin */
+    ext.rxkotlin_version = "2.1.0"
+    /** RxBinding */
+    ext.rxbinding_version = "1.0.1"
+    /** RxLifeCycle */
+    ext.rxlifecycle_version = "2.2.1"
+    //*===========================================================================================================*/
+
+    /** Retrofit2 */
+    ext.retrofit2_version = "2.3.0"
+
+    /** Dagger */
+    ext.dagger_version = "2.11"
+
+    /** JavaMail */
+    ext.javamail_version = "1.6.0"
+
+    /** bootstrap */
+    ext.bootstrap_version = "2.3.2"
+
+    ext.eventbus_version = "3.1.1"
+//=====================================================================================================================*/
+
+    repositories {
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.0.1'
+
+            /** kotlin Libraries */
+            //===========================================================================================================
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+            classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+            classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
+            //===========================================================================================================
+            /** DataBinding Libraries */
+            //===========================================================================================================
+            classpath "com.jakewharton:butterknife-gradle-plugin:$butterknife_version"
+            //===========================================================================================================
+
+            /** Database Libraries */
+            //===========================================================================================================
+            classpath "io.realm:realm-gradle-plugin:$realm_version"
+//            classpath "io.realm:android-adapters:2.1.1"
+            //===========================================================================================================
+
+            /** ReactiveX Libraries */
+            //===========================================================================================================
+            classpath "io.reactivex.rxjava2:rxjava:$rxjava_version"
+            classpath "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+            classpath "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+            classpath "com.jakewharton.rxbinding:rxbinding-kotlin:$rxbinding_version"
+            classpath "com.jakewharton.rxbinding:rxbinding-support-v4-kotlin:$rxbinding_version"
+            classpath "com.jakewharton.rxbinding:rxbinding-appcompat-v7-kotlin:$rxbinding_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle-android:$rxlifecycle_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle-components-preference:$rxlifecycle_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:$rxlifecycle_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxlifecycle_version"
+//            classpath "com.trello.rxlifecycle2:rxlifecycle-android-lifecyle-kotlin:$rxlifecycle_version"
+            classpath "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$rxlifecycle_version"
+            //===========================================================================================================
+
+            /** Retrofit2 Libraries */
+            //===========================================================================================================
+            classpath "com.squareup.retrofit2:retrofit:$retrofit2_version"
+            classpath "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+            classpath "com.squareup.retrofit2:adapter-rxjava:$retrofit2_version"
+
+            /** Dagger */
+            //===========================================================================================================
+            classpath "com.google.dagger:dagger:$dagger_version"
+            //===========================================================================================================
+
+            /** JavaMail */
+            //===========================================================================================================
+            classpath "com.sun.mail:android-mail:$javamail_version"
+            //===========================================================================================================
+
+            /** bootstrap */
+            //===========================================================================================================
+            classpath "com.beardedhen:androidbootstrap:$bootstrap_version"
+            //===========================================================================================================
+            /**
+             * EventBus
+             */
+            classpath "org.greenrobot:eventbus:$eventbus_version"
+        }
+    }
+    allprojects {
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+        }
+    }
+
+//    task clean(type: Delete) {
+//        delete rootProject.buildDir
+//    }
+}
