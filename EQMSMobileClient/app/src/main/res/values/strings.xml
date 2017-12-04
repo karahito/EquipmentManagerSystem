@@ -3,4 +3,6 @@
     <string name="label_worker">社員番号</string>
     <string name="label_code">備品管理番号</string>
     <string name="label_omit">棚卸済の備品を除外する</string>
+    <string name="tag_InputInterfaceFragment">InputInterfaceFragment</string>
+    <string name="tag_EquipmentFragment">EquipmentFragment</string>
 </resources>

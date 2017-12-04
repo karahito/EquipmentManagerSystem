@@ -13,7 +13,9 @@ import java.util.*
 data class EquipmentEntity(
         @PrimaryKey var code:String,
         var worker:String,
-        var name:String
-):RealmModel{
-    constructor() : this("","","")
+        var name:String,
+        var set_date:String,
+        var status:Int)
+ :RealmModel{
+    constructor() : this("","","","",StockTakingStatus.YET.value)
 }

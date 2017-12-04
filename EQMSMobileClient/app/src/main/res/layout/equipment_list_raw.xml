@@ -1,42 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/equipment_list_raw_code"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/raw_check_container"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:maxHeight="60dp"
-        android:minHeight="40dp"
-        app:layout_constraintRight_toLeftOf="@id/equipment_list_raw_number"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/raw_code_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/equipment_list_raw_number"
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/equipment_list_raw_checkBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/raw_code_container"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:maxHeight="60dp"
-        android:minHeight="40dp"
-        app:layout_constraintLeft_toRightOf="@id/equipment_list_raw_code"
-        app:layout_constraintRight_toLeftOf="@id/equipment_list_raw_name"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintLeft_toRightOf="@id/raw_check_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/raw_worker_container"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/equipment_list_raw_name"
+        <TextView
+            android:id="@+id/equipment_list_raw_code"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ems="5"
+            android:gravity="center"
+            android:hint="@string/label_code"
+            android:maxLength="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        ]
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/raw_worker_container"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:maxHeight="60dp"
-        android:minHeight="40dp"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintLeft_toRightOf="@id/raw_code_container"
+        app:layout_constraintRight_toLeftOf="@id/raw_date_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/equipment_list_raw_number"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:hint="@string/label_worker"
+            android:maxLength="3"
+            android:ems="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/raw_date_container"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintLeft_toRightOf="@id/raw_worker_container"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/equipment_list_raw_number"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/equipment_list_raw_date"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:hint="棚卸日時"
+            android:ems="10"
+            android:maxLength="10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

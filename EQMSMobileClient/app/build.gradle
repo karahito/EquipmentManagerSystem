@@ -39,6 +39,11 @@ dependencies {
     //===========================================================================================================
 
     /**
+     * Gson
+     */
+    compile 'com.google.code.gson:gson:2.8.2'
+
+    /**
      * realm android adapters
      */
 //    ext.realm_adapters='2.1.1'

@@ -9,7 +9,6 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import jms.android.commons.network.Protocol.EquipmentEntity
-import jms.eqmsclient.Entity.EquipmentListData
 import jms.eqmsclient.R
 
 /**
@@ -30,7 +29,7 @@ class EquipmentListViewAdapter(context: Context,item:List<EquipmentEntity>):Arra
      */
     @BindView (R.id.equipment_list_raw_code) lateinit var mCode:TextView
     @BindView (R.id.equipment_list_raw_number) lateinit var mNumber:TextView
-    @BindView (R.id.equipment_list_raw_name) lateinit var mName:TextView
+    @BindView (R.id.equipment_list_raw_date) lateinit var mName:TextView
 
     /**
      * Itemの表示Layout用のViewを取得
