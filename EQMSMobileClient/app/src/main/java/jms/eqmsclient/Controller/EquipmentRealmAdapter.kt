@@ -72,6 +72,7 @@ internal class EquipmentRealmAdapter(context: Context,realmResults: OrderedRealm
                 mDate.text=date
                 when(status){
                     StockTakingStatus.YET.value ->{
+                        mCheck.visibility = View.VISIBLE
                         mCheck.isChecked = false
                     }
                     StockTakingStatus.DONE.value ->{
@@ -79,6 +80,7 @@ internal class EquipmentRealmAdapter(context: Context,realmResults: OrderedRealm
                         mCheck.visibility = View.INVISIBLE
                     }
                     StockTakingStatus.WAIT.value->{
+                        mCheck.visibility = View.VISIBLE
                         mCheck.isChecked = true
                     }
                 }

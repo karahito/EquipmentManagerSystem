@@ -23,6 +23,7 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import butterknife.ButterKnife
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import jms.android.commons.network.LogUtil
@@ -52,10 +53,17 @@ class MainActivity : RxAppCompatActivity() {
         subscription.subscribeOn(Schedulers.computation())
                 .unsubscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .retry(3)
+                .retry(1000)
+                .bindToLifecycle(this)
                 .subscribe(
                         {},
-                        {},
+                        {
+                            LogUtil.e("offline work",it)
+                            progress.dismiss()
+                            supportFragmentManager.beginTransaction()
+                                    .add(R.id.contents, ContentsFragment.newInstance())
+                                    .commit()
+                        },
                         {
                             progress.dismiss()
                             LogUtil.d("complete")

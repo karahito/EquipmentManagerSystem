@@ -44,6 +44,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
 
     /**
+     * klaxon
+     */
+    compile 'com.beust:klaxon:0.30'
+
+    /**
      * realm android adapters
      */
 //    ext.realm_adapters='2.1.1'

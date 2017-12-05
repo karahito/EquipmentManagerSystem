@@ -18,7 +18,7 @@
 package jms.android.commons.network.Protocol
 
 import io.reactivex.Observable
-import io.reactivex.Observable.*
+import io.reactivex.Observable.create
 import io.realm.Realm
 import io.realm.exceptions.RealmException
 import jms.android.commons.network.LogUtil
@@ -26,7 +26,6 @@ import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
-import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -38,17 +37,14 @@ import java.io.IOException
 class RxCommit {
     companion object {
         @JvmStatic fun newInstance() = RxCommit()
+        private val JSON = MediaType.parse("application/json charset=utf-8")
     }
     private val client = OkHttpClient()
 
-    fun getClient():OkHttpClient{
-        val interceptor = HttpLoggingInterceptor()
-        return OkHttpClient.Builder().addInterceptor(interceptor).build()
-    }
 
-    private fun postApi(url:String,data:String):String{
-        val mimeType = MediaType.parse(data)
-        val requestBody = RequestBody.create(mimeType,"")
+    private fun postApi(url:String,json:String):String{
+        val mimeType = MediaType.parse(json)
+        val requestBody = RequestBody.create(JSON,json)
         val request = Request.Builder().url(url).post(requestBody).build()
         val response = client.newCall(request).execute()
         return response.body()?.string() ?: throw ClassCastException("return error")

@@ -17,6 +17,7 @@
 
 package jms.android.commons.network.Protocol
 
+import android.annotation.SuppressLint
 import io.reactivex.Observable
 import io.reactivex.Observable.create
 import io.reactivex.subjects.AsyncSubject
@@ -24,16 +25,17 @@ import io.reactivex.subjects.Subject
 import io.realm.Realm
 import io.realm.exceptions.RealmException
 import jms.android.commons.network.LogUtil
-import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import java.io.IOException
+import java.text.SimpleDateFormat
+
+import java.util.*
 
 /**
  * @author D.Noguchi
@@ -119,6 +121,7 @@ class RxNetwork {
         return subject
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun getDatabase(url:String):Observable<String>{
         return create {
             var realm:Realm? = null
@@ -130,6 +133,22 @@ class RxNetwork {
                 realm = Realm.getDefaultInstance()
                 realm?.beginTransaction()
                 realm?.createOrUpdateAllFromJson(EquipmentEntity::class.java,arrayJson)
+                val query = realm?.where(EquipmentEntity::class.java)?.findAll()
+                val format = SimpleDateFormat("yyyyMM")
+                val today = Calendar.getInstance().get(Calendar.DATE)
+                var date = format.format(Date(System.currentTimeMillis()))
+                date += "25"
+                query?.forEach {
+                    if(today >= 25){
+                        if(it.set_date >= date)
+                            it.status = StockTakingStatus.DONE.value
+                        else
+                            it.status = StockTakingStatus.YET.value
+                    }else{
+
+                    }
+                }
+                realm?.insertOrUpdate(query)
                 realm?.commitTransaction()
 //                val res = resJson.toString()
                 it.onNext(arrayJson.toString())

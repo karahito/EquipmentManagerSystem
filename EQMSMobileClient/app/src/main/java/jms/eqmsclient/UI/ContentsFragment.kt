@@ -27,6 +27,7 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.trello.rxlifecycle2.components.support.RxFragment
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import jms.android.commons.network.LogUtil
@@ -41,8 +42,8 @@ import jms.eqmsclient.R
 class ContentsFragment:RxFragment() {
     companion object {
         @JvmStatic fun newInstance() = ContentsFragment()
-        @JvmStatic val subscription = RxCommit.newInstance()
-        @JvmStatic private val url = "http://192.168.1.208:8080/"
+        @JvmStatic val subscription = RxCreateCommitData().rxGetCommitData()
+        @JvmStatic private val url = "http://192.168.1.208:8080/transaction"
     }
 
     @BindView(R.id.commit) lateinit var mCommit:Button
@@ -63,23 +64,59 @@ class ContentsFragment:RxFragment() {
 
         ButterKnife.bind(this,view)
         mCommit.setOnClickListener {
-            LogUtil.d(RxCreateCommitData().CreateJson())
             val progress = ProgressDialog(this.context)
-            subscription.postDatabase(url,RxCreateCommitData().CreateJson())
-                    .subscribeOn(Schedulers.computation())
-                    .retry(2)
+            progress.show()
+            subscription.subscribeOn(Schedulers.computation())
+                    .bindToLifecycle(this)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            /** onNext*/
-                            {},
+                            /** onNext */
+                            {
+                                RxCommit().postDatabase(url,it)
+                                        .subscribeOn(Schedulers.computation())
+                                        .bindToLifecycle(this)
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(
+                                                {},
+                                                {},
+                                                {})
+                            },
                             /** onError */
                             {},
                             /** onComplete */
                             {
                                 progress.dismiss()
-                                Toast.makeText(this.context,"Commit Successful",Toast.LENGTH_SHORT).show()
                             }
                     )
+//            LogUtil.d(RxCreateCommitData().CreateJson())
+//            val progress = ProgressDialog(this.context)
+//            val json = RxCreateCommitData().CreateJson()
+//            if (json != null) {
+//                subscription.postDatabase(url,json)
+//                        .subscribeOn(Schedulers.computation())
+//                        .retry(2)
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(
+//                                /** onNext*/
+//                                {
+//                                    LogUtil.d("onNext"+it.toString())
+//                                },
+//                                /** onError */
+//                                {
+//                                    LogUtil.e(it)
+//                                    progress.dismiss()
+//                                },
+//                                /** onComplete */
+//                                {
+//                                    LogUtil.d("onComplete")
+//                                    progress.dismiss()
+//                                    Toast.makeText(this.context, "Commit Successful", Toast.LENGTH_SHORT).show()
+//                                }
+//                        )
+//            }else{
+//                progress.dismiss()
+////                throw ClassCastException("json type error")
+//            }
         }
     }
 }
